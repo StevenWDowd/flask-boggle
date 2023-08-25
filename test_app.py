@@ -62,7 +62,7 @@ class BoggleAppTestCase(TestCase):
                                               json={
                                                   "gameId": gameId,
                                                   "word": "TEST"})
-            valid_data= valid_input.get_json()
+            valid_data = valid_input.get_json()
 
             self.assertEqual(valid_data, {"result": "ok"})
 
@@ -83,3 +83,4 @@ class BoggleAppTestCase(TestCase):
             board_data = board_input.get_json()
 
             self.assertEqual(board_data, {"result": "not-on-board"})
+

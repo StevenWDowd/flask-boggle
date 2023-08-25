@@ -30,18 +30,25 @@ def new_game():
 
 @app.post("/api/score-word")
 def score_word():
+    """Takes user-submitted data, from which it extracts the gameId and the
+    submitted word. It uses the gameId to get a game instance and then checks
+    whether the played word is valid in that game."""
 
     game_data = request.get_json()
+    #DONE: Don't use get; you want to crash if there is no corresponding game
     current_game = games.get(game_data.get("gameId"))
+    current_game = games[game_data["gameId"]]
     target_word = game_data["word"]
 
+    #Is this necessary?
     if not current_game:
         return jsonify({"result": "game-not-found"})
 
-    if current_game.is_word_in_word_list(target_word) is False:
+    #TODO: Invoke score_word
+    if not current_game.is_word_in_word_list(target_word):
         return jsonify({"result": "not-word"})
 
-    if current_game.check_word_on_board(target_word) is False:
+    if not current_game.check_word_on_board(target_word):
         return jsonify({"result": "not-on-board"})
 
     return jsonify({"result": "ok"})
