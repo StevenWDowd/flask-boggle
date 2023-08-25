@@ -27,17 +27,19 @@ class BoggleAppTestCase(TestCase):
 
             self.assertEqual(response.status_code, 200)
             self.assertIn("<title>Boggle</title>", html)
+            self.assertIn("<!-- this is the homepage -->", html)
 
     def test_api_new_game(self):
         """Test starting a new game."""
 
         with self.client as client:
-            ...
-            # make a post request to /api/new-game
-            # get the response body as json using .get_json()
-            # test that the game_id is a string
-            # test that the board is a list
-            # test that the game_id is in the dictionary of games (imported from app.py above)
+            response = client.post('/api/new-game')
+            json = response.get_json()
+
+            self.assertEqual(type(json["gameId"]) == str , True)
+            self.assertIsInstance(json["board"], list)
+            self.assertIn(json["gameId"], games.keys())
+
 
     def test_score_word(self):
         """Test if word is valid"""
