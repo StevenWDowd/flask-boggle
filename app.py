@@ -36,13 +36,12 @@ def score_word():
     target_word = game_data["word"]
 
     if not current_game:
-        return jsonify({"result": "non-game"})
+        return jsonify({"result": "game-not-found"})
 
-
-    if current_game.is_word_in_word_list(target_word) == False:
+    if current_game.is_word_in_word_list(target_word) is False:
         return jsonify({"result": "not-word"})
 
-    if current_game.check_word_on_board(target_word) == False:
+    if current_game.check_word_on_board(target_word) is False:
         return jsonify({"result": "not-on-board"})
 
     return jsonify({"result": "ok"})
