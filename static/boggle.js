@@ -88,6 +88,4 @@ async function displayResult(response, word) {
 }
 
 
-
-
 start();
